@@ -2,15 +2,11 @@ package com.car_rental.client;
 
 import java.util.Scanner;
 
-import com.car_rental.server.CarRServer;
-
 import grpc.EchoRequest;
 import grpc.EchoResponse;
 import grpc.EchoServiceGrpc;
 import io.grpc.Channel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.Server;
-
 public class Client {
 	 public static void main(String[] args) {
 	        EchoServiceGrpc.EchoServiceBlockingStub client = createClient("localhost",8080);
@@ -22,6 +18,7 @@ public class Client {
 	            EchoResponse response = client.echo(request);
 	            System.out.println("response="+response.getMessage());
 	        }
+	        console.close();
 	    }
 
 	    private static EchoServiceGrpc.EchoServiceBlockingStub createClient(String host, int port){
