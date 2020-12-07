@@ -4,7 +4,8 @@ import car_rental.common.CarRental;
 import grpc.EchoRequest;
 import grpc.EchoResponse;
 import grpc.EchoServiceGrpc;
-
+import grpc.ReqAllCars;
+import grpc.ResAllCars;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 

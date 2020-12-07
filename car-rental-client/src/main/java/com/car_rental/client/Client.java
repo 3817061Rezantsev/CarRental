@@ -5,6 +5,8 @@ import java.util.Scanner;
 import grpc.EchoRequest;
 import grpc.EchoResponse;
 import grpc.EchoServiceGrpc;
+import grpc.ReqAllCars;
+import grpc.ResAllCars;
 import io.grpc.Channel;
 import io.grpc.ManagedChannelBuilder;
 
