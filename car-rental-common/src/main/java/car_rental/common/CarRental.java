@@ -50,14 +50,9 @@ public class CarRental {
 	}
 	
 	public String getCarsWithModel(String model) {
-		List<Car> car_list_mod = new ArrayList<>();
-		for (Car c : car_list) {
-			if (c.getModel().equals(model))
-				car_list_mod.add(c);
-		}
+		List<Car> car_list_mod = getCarListWithModel(model);
 		String res = "\n";
 		for (Car c : car_list_mod) {
-			if (c.getRent())
 				res += c.toString() + "\n";
 		}
 		return res;
@@ -84,8 +79,8 @@ public class CarRental {
 		return i.toString();
 	}
 
-	public void changeCarChar(String carId, String condition, String mileage) {
-		car_list.get(Integer.parseInt(carId) - 1).setChar(condition, mileage);
+	public void changeCarChar(String carId, String mileage, String condition, String rentCost) {
+		car_list.get(Integer.parseInt(carId) - 1).setChar(condition, mileage, rentCost);
 	}
 
 	public String orderACar(String carId, int days) {

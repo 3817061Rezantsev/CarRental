@@ -16,7 +16,7 @@ public class CarRServer extends EchoServiceGrpc.EchoServiceImplBase {
 		String mes = request.getMessage();
 		String res = GetCarMethods(mes);
 		System.out.println("receive:" + mes);
-
+		System.out.println("Result:" + res);
 		EchoResponse response = EchoResponse.newBuilder().setMessage("response from server:" + res).build();
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
@@ -32,15 +32,16 @@ public class CarRServer extends EchoServiceGrpc.EchoServiceImplBase {
 			res = cs.getAllValCars();
 		}
 		if (mes.contains("e2 ")) {
-			tmp = mes.substring(4);
-			res = cs.getCarsWithModel(tmp);
+			tmp = mes.substring(3);
+			System.out.println("temp:" + tmp);
+			res = cs.getCarsWithModel(tmp.trim());
 		}
 		if (mes.contains("c2 ")) {
-			tmp = mes.substring(4);
+			tmp = mes.substring(3);
 			res = cs.getRentCarsWithModel(tmp);
 		}
 		if (mes.contains("e3 ")) {
-			tmp = mes.substring(4);
+			tmp = mes.substring(3);
 			String[] s = tmp.split(" ");
 			if (s.length < 4) {
 				res = "Error";
@@ -50,9 +51,9 @@ public class CarRServer extends EchoServiceGrpc.EchoServiceImplBase {
 		}
 
 		if (mes.contains("c3 ")) {
-			tmp = mes.substring(4);
+			tmp = mes.substring(3);
 			String[] s = tmp.split(" ");
-			if (s.length < 4) {
+			if (s.length < 2) {
 				res = "Error";
 			} else {
 			res = cs.orderACar(s[0].trim(), Integer.parseInt(s[1].trim()));
@@ -60,18 +61,18 @@ public class CarRServer extends EchoServiceGrpc.EchoServiceImplBase {
 		}
 
 		if (mes.contains("e4 ")) {
-			tmp = mes.substring(4);
+			tmp = mes.substring(3);
 			String[] s = tmp.split(" ");
-			if (s.length < 3) {
+			if (s.length < 4) {
 				res = "Error";
 			} else {
-			cs.changeCarChar(s[0].trim(), s[1].trim(), s[2].trim());
+			cs.changeCarChar(s[0].trim(), s[1].trim(), s[2].trim(), s[3].trim());
 			res = cs.getCar(s[0].trim()).toString();
 			}
 		}
 
 		if (mes.contains("c4 ")) {
-			tmp = mes.substring(4);
+			tmp = mes.substring(3);
 			cs.returnCar(tmp);
 			res = "Returned";
 		}

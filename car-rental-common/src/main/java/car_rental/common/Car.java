@@ -45,9 +45,10 @@ public class Car {
 		return rentCost;
 	}
 
-	public void setChar(String condition, String mileage) {
+	public void setChar(String condition, String mileage, String rentCost) {
 		this.condition = condition;
 		this.mileage = mileage;
+		this.rentCost = rentCost;
 	}
 
 	@Override
