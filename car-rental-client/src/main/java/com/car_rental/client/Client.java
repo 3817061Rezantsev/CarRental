@@ -64,8 +64,8 @@ public class Client {
 					if (message.equals("0")) {
 						break;
 					} else if (message.equals("1")) {
-						EchoRequest request = EchoRequest.newBuilder().setMessage("e1 ").build();
-						EchoResponse response = client.echo(request);
+						ReqAllCars request = ReqAllCars.newBuilder().build();
+						ResAllCars response = client.allCars(request);
 						System.out.println(response.getMessage());
 					} else if (message.equals("2")) {
 						message = console.nextLine();

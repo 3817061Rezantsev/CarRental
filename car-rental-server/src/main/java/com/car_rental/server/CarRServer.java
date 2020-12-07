@@ -22,6 +22,14 @@ public class CarRServer extends EchoServiceGrpc.EchoServiceImplBase {
 		responseObserver.onCompleted();
 	}
 
+	@Override
+	public void allCars(ReqAllCars request, io.grpc.stub.StreamObserver<ResAllCars> responseObserver) {
+		String res = cs.getAllCars();
+		ResAllCars response = ResAllCars.newBuilder().setMessage("response from server:" + res).build();
+		responseObserver.onNext(response);
+		responseObserver.onCompleted();
+	}
+	
 	public String GetCarMethods(String mes) {
 		String res = "";
 		String tmp;
