@@ -1,12 +1,16 @@
 package car_rental.common;
 
 public class Car {
-	private String carId;
-	private String model;
-	private String condition;
-	private String rentCost;
-	private String mileage;
-	private boolean rent;
+	public String carId;
+	public String model;
+	public String condition;
+	public String rentCost;
+	public String mileage;
+	public boolean rent;
+	
+	public Car() {
+		
+	}
 
 	public Car(String carId, String model, String condition, String rentCost, String mileage) {
 		this.carId = carId;
@@ -45,10 +49,9 @@ public class Car {
 		return rentCost;
 	}
 
-	public void setChar(String condition, String mileage, String rentCost) {
+	public void setChar(String condition, String mileage) {
 		this.condition = condition;
 		this.mileage = mileage;
-		this.rentCost = rentCost;
 	}
 
 	@Override

@@ -6,22 +6,58 @@ option java_package = "grpc";
 option java_outer_classname = "EchoServiceProto";
 
 
-message EchoRequest{
-    string message = 1;
-}
 
 message ReqAllCars{
+}
+
+message CarInt{
+	string id = 1; 
+	string model = 2;
+	string condition = 3;
+	string cost = 4;
+	string mile = 5;
+	bool rent = 6;
 }
 
 message ResAllCars{
 	string message = 1;
 }
 
-message EchoResponse{
-    string message = 1;
+message ReqModCars{
+	string message = 1;
+}
+
+message Order{
+	string message = 1;
+	int32 day = 2;
+}
+
+message Value {
+	int32 message = 1;
+}
+
+message NewCar{
+	string model = 1;
+	string condition = 2;
+	string rent = 3;
+	string mile = 4;
+}
+
+message ChangeCar{
+	string id = 1;
+	string mile = 2;
+	string condition = 3;
 }
 
 service EchoService{
-    rpc echo(EchoRequest) returns (EchoResponse){}
     rpc allCars(ReqAllCars) returns (ResAllCars){}
+    rpc allValCars(ReqAllCars) returns (ResAllCars){}
+    rpc allModCars(ReqModCars) returns (ResAllCars){}
+    rpc allValModCars(ReqModCars) returns (ResAllCars){}
+    rpc reqCar(Order) returns (Value){}
+    rpc reqNewCar(NewCar) returns (ResAllCars){}
+    rpc reqReturn(ReqModCars) returns (ReqAllCars){}
+    rpc reqChange(ChangeCar) returns (ReqAllCars){}
+    rpc allCarsCount(ReqAllCars) returns (Value){}
+    rpc reqCarId(Value) returns (CarInt){}
 }

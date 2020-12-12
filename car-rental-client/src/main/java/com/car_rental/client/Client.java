@@ -2,11 +2,15 @@ package com.car_rental.client;
 
 import java.util.Scanner;
 
-import grpc.EchoRequest;
-import grpc.EchoResponse;
+
 import grpc.EchoServiceGrpc;
 import grpc.ReqAllCars;
 import grpc.ResAllCars;
+import grpc.ReqModCars;
+import grpc.Value;
+import grpc.Order;
+import grpc.NewCar;
+import grpc.ChangeCar;
 import io.grpc.Channel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -35,24 +39,28 @@ public class Client {
 					if (message.equals("0")) {
 						break;
 					} else if (message.equals("1")) {
-						EchoRequest request = EchoRequest.newBuilder().setMessage("c1 ").build();
-						EchoResponse response = client.echo(request);
+						ReqAllCars request = ReqAllCars.newBuilder().build();
+						ResAllCars response = client.allValCars(request);
 						System.out.println(response.getMessage());
 					} else if (message.equals("2")) {
 						message = console.nextLine();
-						EchoRequest request = EchoRequest.newBuilder().setMessage("c2 " + message).build();
-						EchoResponse response = client.echo(request);
+						ReqModCars request = ReqModCars.newBuilder().setMessage(message).build();
+						ResAllCars response = client.allValModCars(request);
 						System.out.println(response.getMessage());
 					} else if (message.equals("3")) {
-						message = console.nextLine();
-						EchoRequest request = EchoRequest.newBuilder().setMessage("c3 " + message).build();
-						EchoResponse response = client.echo(request);
+						System.out.println("Id:");
+						String message1 = console.nextLine();
+						System.out.println("Days:");
+						String message2 = console.nextLine();
+						Order request = Order.newBuilder().setMessage(message1).setDay(Integer.parseInt(message2)).build();
+						Value response = client.reqCar(request);
 						System.out.println(response.getMessage());
 					} else if (message.equals("4")) {
+						System.out.println("Id:");
 						message = console.nextLine();
-						EchoRequest request = EchoRequest.newBuilder().setMessage("c4 " + message).build();
-						EchoResponse response = client.echo(request);
-						System.out.println(response.getMessage());
+						ReqModCars request = ReqModCars.newBuilder().setMessage(message).build();
+						ReqAllCars response = client.reqReturn(request);
+						System.out.println("Returned");
 					}
 				}
 			} else if (message.equals("2")) {
@@ -71,19 +79,33 @@ public class Client {
 						System.out.println(response.getMessage());
 					} else if (message.equals("2")) {
 						message = console.nextLine();
-						EchoRequest request = EchoRequest.newBuilder().setMessage("e2 " + message).build();
-						EchoResponse response = client.echo(request);
+						ReqModCars request = ReqModCars.newBuilder().setMessage(message).build();
+						ResAllCars response = client.allModCars(request);
 						System.out.println(response.getMessage());
 					} else if (message.equals("3")) {
-						message = console.nextLine();
-						EchoRequest request = EchoRequest.newBuilder().setMessage("e3 " + message).build();
-						EchoResponse response = client.echo(request);
+						String[] str = new String[4];
+						System.out.println("model");
+						str[0] = console.nextLine();
+						System.out.println("condition");
+						str[1] = console.nextLine();
+						System.out.println("rent");
+						str[2] = console.nextLine();
+						System.out.println("mile");
+						str[3] = console.nextLine();
+						NewCar request = NewCar.newBuilder().setModel(str[0]).setCondition(str[1]).setRent(str[2]).setMile(str[3]).build();
+						ResAllCars response = client.reqNewCar(request);
 						System.out.println(response.getMessage());
 					} else if (message.equals("4")) {
-						message = console.nextLine();
-						EchoRequest request = EchoRequest.newBuilder().setMessage("e4 " + message).build();
-						EchoResponse response = client.echo(request);
-						System.out.println(response.getMessage());
+						String[] str = new String[3];
+						System.out.println("id");
+						str[0] = console.nextLine();
+						System.out.println("mile");
+						str[1] = console.nextLine();
+						System.out.println("condition");
+						str[2] = console.nextLine();
+						ChangeCar request = ChangeCar.newBuilder().setId(str[0]).setMile(str[1]).setCondition(str[2]).build();
+						ReqAllCars response = client.reqChange(request);
+						System.out.println("Changed");
 					}
 				}
 			}

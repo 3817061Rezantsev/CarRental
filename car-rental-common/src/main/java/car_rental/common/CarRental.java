@@ -79,16 +79,16 @@ public class CarRental {
 		return i.toString();
 	}
 
-	public void changeCarChar(String carId, String mileage, String condition, String rentCost) {
-		car_list.get(Integer.parseInt(carId) - 1).setChar(condition, mileage, rentCost);
+	public void changeCarChar(String carId, String mileage, String condition) {
+		car_list.get(Integer.parseInt(carId) - 1).setChar(condition, mileage);
 	}
 
-	public String orderACar(String carId, int days) {
+	public int orderACar(String carId, int days) {
 		if (car_list.get(Integer.parseInt(carId) - 1).getRent()) {
 			car_list.get(Integer.parseInt(carId) - 1).setRent(false);
-			return "" + Integer.parseInt(car_list.get(Integer.parseInt(carId) - 1).getRentCost()) * days;
+			return Integer.parseInt(car_list.get(Integer.parseInt(carId) - 1).getRentCost()) * days;
 		} else {
-			return "-1";
+			return -1;
 		}
 	}
 
